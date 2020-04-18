@@ -16,11 +16,30 @@ print("      ▄▀▀▀█▄▐█▌▐█▪▐█▐▐▌ ▐█.▪█�
 print("      ▐█▄▪▐█ ▐█▀·.██▐█▌ ▐█▌·██▌▐▀▐█▄▄▌▐█▄▪▐█▐█▌█▌▪▄█▀▐█▄▄▌▐█•█▌")
 print("       ▀▀▀▀   ▀ • ▀▀ █▪ ▀▀▀ ▀▀▀ · ▀▀▀  ▀▀▀▀ ▀▀▀·▀▀▀ • ▀▀▀ .▀  ▀")
 print("")
-print("")
+print("") 
 
-win_size = width, height = 320, 240
+
 pygame.init()
-screen = pygame.display.set_mode(win_size)
+# set the pygame window name 
+pygame.display.set_caption('Moonstone Synthesizer')
+width = 320
+height = 240
+screen = pygame.display.set_mode((width, height))
+
+white = (255, 255, 255) 
+green = (0, 255, 0) 
+blue = (0, 0, 128)
+cyan = (0, 255, 255)
+
+font = pygame.font.Font('fonts/manaspc.ttf', 10) # font by codeman38
+text = font.render('The moonstone synth is here', True, green)
+  
+# create a rectangular object for the 
+# text surface object 
+textRect = text.get_rect()  
+  
+# set the center of the rectangular object. 
+textRect.center = (width // 2, height // 2) 
 
 
 
@@ -30,7 +49,7 @@ waveforms = []
 n_samples = 4410
 hz = 50
 t = np.linspace(0, 1, n_samples)
-volume = 0.7
+volume = 0.4
 
 # play values
 sps = 44100 #samples per second, 44.1 khz, cd quality
@@ -59,6 +78,9 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+
+    screen.blit(text, textRect)
+    pygame.display.update()
 sd.stop()        
 
 
