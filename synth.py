@@ -18,7 +18,6 @@ print("       ▀▀▀▀   ▀ • ▀▀ █▪ ▀▀▀ ▀▀▀ · ▀▀
 print("")
 print("")
 
-#to do: convert to pygame.
 win_size = width, height = 320, 240
 pygame.init()
 screen = pygame.display.set_mode(win_size)
