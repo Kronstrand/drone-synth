@@ -1,3 +1,8 @@
+import numpy as np
+import sounddevice as sd
+from scipy import signal
+import pygame, sys
+
 print("")
 print("")
 print("      • ▌ ▄ ·.              ▐ ▄ .▄▄ · ▄▄▄▄▄       ▐ ▄ ▄▄▄ .")    
@@ -13,11 +18,12 @@ print("       ▀▀▀▀   ▀ • ▀▀ █▪ ▀▀▀ ▀▀▀ · ▀▀
 print("")
 print("")
 
-from scipy import signal
-import matplotlib.pyplot as plt
-import numpy as np
-import sounddevice as sd
-import time
+#to do: convert to pygame.
+win_size = width, height = 320, 240
+pygame.init()
+screen = pygame.display.set_mode(win_size)
+
+
 
 waveforms = []
 
@@ -25,6 +31,7 @@ waveforms = []
 n_samples = 4410
 hz = 50
 t = np.linspace(0, 1, n_samples)
+volume = 0.7
 
 # play values
 sps = 44100 #samples per second, 44.1 khz, cd quality
@@ -45,10 +52,14 @@ def combineWaveforms(waveforms):
     return waveform
 
 waveform = combineWaveforms(waveforms)
+attinuated_waveform = waveform * volume
 
-# play waveform
-sd.play(waveform, sps, loop=True)
-time.sleep(2)
+sd.play(attinuated_waveform, sps, loop=True)
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
 sd.stop()        
 
 
