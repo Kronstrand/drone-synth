@@ -85,7 +85,7 @@ attinuated_waveform = waveform * volume
 
 sd.play(attinuated_waveform, sps, loop=True)
 
-key_sensitivity = 0.3
+key_sensitivity = 0.03
 
 while True:
     for event in pygame.event.get():
@@ -102,7 +102,7 @@ while True:
                     volume = 0
                 else:
                     volume -= key_sensitivity
-    
+
     #render visuals
     screen.blit(text, textRect)
     screen.blit(vol_text, vol_text_rect)
